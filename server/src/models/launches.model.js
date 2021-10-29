@@ -6,25 +6,13 @@ const launch = {
   mission: 'Kepler Exploration X',
   rocket: 'Explorer IS1',
   launchDate: new Date('December 20, 2030'),
-  destination: 'Kepler-442 b',
-  customers: ['Evgeniy','NASA'],
-  upcoming: true,
-  success: true,
-}
-
-const launch2 = {
-  flightNumber: 200,
-  mission: 'Kepler Exploration X',
-  rocket: 'Explorer IS1',
-  launchDate: new Date('December 21, 2031'),
-  destination: 'Kepler-442 b',
-  customers: ['Evgeniy','NASA'],
+  target: 'Kepler-442 b',
+  customers: ['Evgeniy', 'NASA'],
   upcoming: true,
   success: true,
 }
 
 launches.set(launch.flightNumber, launch);
-launches.set(launch2.flightNumber, launch2);
 
 function getAllLaunches() {
   return Array.from(launches.values())
@@ -32,7 +20,7 @@ function getAllLaunches() {
 
 function addNewLaunch(launch) {
   latestFlightNumber++;
-  launches.set(launch.flightNumber,
+  launches.set(latestFlightNumber,
     Object.assign(launch, {
       success: true,
       upcoming: true,
@@ -42,7 +30,13 @@ function addNewLaunch(launch) {
   )
 }
 
+function abortLaunch(id) {
+  launches.delete(id)
+  return !launches.has(id);
+}
+
 module.exports = {
   getAllLaunches,
   addNewLaunch,
+  abortLaunch,
 }
