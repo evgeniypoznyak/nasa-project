@@ -1,6 +1,7 @@
 const {
   getAllLaunches,
   addNewLaunch,
+  launchExist,
   abortLaunch
 } = require('../../models/launches.model');
 
@@ -26,14 +27,15 @@ function httpAddNewLaunch(req, res) {
 
 function httpAbortLaunch(req, res) {
   const id = +req.params.id
-  console.log(id)
-  const result = abortLaunch(id)
-  if (result) {
-    return res.status(202).json({})
+  if (!launchExist(id)) {
+    return res.status(404).json({
+      error: `Launch does not exist with id: ${id}`
+    })
   }
-  return res.status(400).json({
-    error: `Launch does not exist with id: ${id}`
-  })
+  const deletedLaunch = abortLaunch(id)
+  return res.status(202).json(deletedLaunch)
+
+
 
 }
 

@@ -29,14 +29,20 @@ function addNewLaunch(launch) {
     })
   )
 }
+function launchExist(id) {
+    return launches.has(id)
+}
 
 function abortLaunch(id) {
-  launches.delete(id)
-  return !launches.has(id);
+  const abortedLaunch = launches.get(id)
+  abortedLaunch.upcoming = false;
+  abortedLaunch.success = false;
+  return abortedLaunch;
 }
 
 module.exports = {
   getAllLaunches,
   addNewLaunch,
+  launchExist,
   abortLaunch,
 }
