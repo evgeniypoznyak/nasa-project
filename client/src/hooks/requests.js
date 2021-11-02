@@ -1,14 +1,12 @@
 const API_URL = 'http://localhost:8000'
 
 async function httpGetPlanets() {
-  // TODO: Once API is ready.
   const response = await fetch(`${API_URL}/planets`)
   return await response.json()
   // Load planets and return as JSON.
 }
 
 async function httpGetLaunches() {
-  // TODO: Once API is ready.
   const response = await fetch(`${API_URL}/launches`)
   return (await response.json()).sort((a, b) => a.flightNumber - b.flightNumber)
   // Load launches, sort by flight number, and return as JSON.
