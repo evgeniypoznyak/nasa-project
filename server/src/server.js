@@ -2,6 +2,7 @@ const colors = require('colors');
 const http = require('http')
 const app = require('./app');
 const { loadPlanetsData } = require('./models/planets.model')
+const { loadLaunchesData } = require('./models/launches.model')
 const { connectToMongoDB } = require('./services/mongo');
 
 const server = http.createServer(app)
@@ -12,6 +13,7 @@ const HOST = process.env.HOST = 'http://localhost';
 async function startServer() {
   await connectToMongoDB();
   await loadPlanetsData()
+  await loadLaunchesData()
 
   server.listen(PORT, () => console.log(`Listening on port: ${PORT}...
 ${HOST}:${PORT}

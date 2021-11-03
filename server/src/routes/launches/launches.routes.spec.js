@@ -17,7 +17,7 @@ describe('launches.route', function () {
 
   describe('test GET launches', () => {
     it('Should response with 200', async () => {
-      const response = await request(app).get('/launches')
+      const response = await request(app).get('/v1/launches')
         .expect('Content-Type', /json/)
         .expect(200)
       // expect(response.statusCode).toBe(200)
@@ -38,7 +38,7 @@ describe('launches.route', function () {
     }
 
     it('Should respond with 201', async () => {
-      const response = await request(app).post('/launches')
+      const response = await request(app).post('/v1/launches')
         .send({
           "mission": "Evgeniy111",
           "rocket": "Evgeniy Intelstellar IS1",
@@ -52,7 +52,7 @@ describe('launches.route', function () {
         .toBe(new Date(response.body.launchDate).valueOf())
     });
     it('Should catch missing required properties', async () => {
-      const response = await request(app).post('/launches')
+      const response = await request(app).post('/v1/launches')
         .send(requestWithoutDate)
         .expect('Content-Type', /json/)
         .expect(400)
@@ -67,7 +67,7 @@ describe('launches.route', function () {
         "target": "Kepler-186 f",
         "launchDate": "test"
       }
-      const response = await request(app).post('/launches')
+      const response = await request(app).post('/v1/launches')
         .send(requestWithInvalidDate)
         .expect('Content-Type', /json/)
         .expect(400)

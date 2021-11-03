@@ -14,10 +14,12 @@ const launch = {
   success: true,
 }
 
-try {
-  saveLaunch(launch)
-} catch (e) {
-  console.error(e.message)
+
+saveLaunch(launch).catch((e) => console.error(`${e.message}`.red))
+
+
+async function loadLaunchesData() {
+
 }
 
 async function getAllLaunches() {
@@ -80,4 +82,5 @@ module.exports = {
   abortLaunch,
   saveLaunch,
   scheduleNewLaunch,
+  loadLaunchesData
 }

@@ -16,7 +16,7 @@ async function connectToMongoDB() {
 }
 
 async function disconnectFromMongoDB() {
-
+  await mongoose.disconnect()
 }
 
 mongoose.connection.on('open', () => {
