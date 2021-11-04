@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 /server/node_modules
+public
+/public
+/server/public
 /client/node_modules
 
 /.pnp
