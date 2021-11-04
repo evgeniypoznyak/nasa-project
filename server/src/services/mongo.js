@@ -1,15 +1,13 @@
 const mongoose = require('mongoose');
 
-const MONGO_URL = 'mongodb://localhost:8002/nasa';
-
 async function connectToMongoDB() {
   try {
-    await mongoose.connect(MONGO_URL, {
+    await mongoose.connect(process.env.MONGO_DB_CONNECTION, {
       useNewUrlParser: true,
       // useFindAndModify: false,
       // useCreateIndex: true,
       useUnifiedTopology: true,
-    })
+    }, null)
   } catch (e) {
     console.error(`ERROR WITH MONGODB: ${e.message}`.red,)
   }

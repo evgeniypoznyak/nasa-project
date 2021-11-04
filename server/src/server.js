@@ -1,4 +1,5 @@
-const colors = require('colors');
+require('colors'); // coloring strings in console
+require('dotenv').config() // making .env file readable
 const http = require('http')
 const app = require('./app');
 const { loadPlanetsData } = require('./models/planets.model')
