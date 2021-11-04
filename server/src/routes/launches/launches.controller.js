@@ -2,19 +2,20 @@ const {
   getAllLaunches,
   launchExist,
   abortLaunch,
-  saveLaunch,
   scheduleNewLaunch
 } = require('../../models/launches.model');
+const { getPagination } = require('../../services/query');
 
 
 async function httpGetAllLaunches(req, res) {
   try {
-    return res.status(200).json(await getAllLaunches())
+    const { skip, limit } = getPagination(req.query)
+    const launches = await getAllLaunches(skip, limit)
+    return res.status(200).json(launches)
   } catch (e) {
     return res.status(400) // client related - Bad Request - syntax error
       .json({ error: e.message })
   }
-
 }
 
 async function httpAddNewLaunch(req, res) {
@@ -28,7 +29,13 @@ async function httpAddNewLaunch(req, res) {
     return res.status(400) // client related - Bad Request - syntax error
       .json({ error: 'Invalid launch date' })
   }
-  await scheduleNewLaunch(launch)
+  try {
+    await scheduleNewLaunch(launch)
+  } catch (e) {
+    return res.status(400) // client related - Bad Request - syntax error
+      .json({ error: 'Target planet is not exist' })
+  }
+
   return res.status(201).json(launch)
 }
 
@@ -48,7 +55,6 @@ async function httpAbortLaunch(req, res) {
   return res.status(202).json({
     ok: true
   })
-
 
 
 }

@@ -11,6 +11,7 @@
     "stop-cluster": "pm2 delete server && pm2 save"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "csv-parse": "^4.16.3",
