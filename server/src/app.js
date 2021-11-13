@@ -2,8 +2,10 @@ const path = require('path');
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
+const helmet = require('helmet')
 const apiV1 = require('./routes/api.v1')
 const app = express()
+// app.use(helmet())
 
 app.use(cors({
   origin: 'http://localhost:3000'
