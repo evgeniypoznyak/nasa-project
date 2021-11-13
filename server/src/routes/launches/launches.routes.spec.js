@@ -4,11 +4,13 @@ const {
   connectToMongoDB,
   disconnectFromMongoDB
 } = require('../../services/mongo');
+const { loadPlanetsData } = require('../../models/planets.model');
 
 describe('launches.route', function () {
 
   beforeAll(async () => {
     await connectToMongoDB()
+    await loadPlanetsData()
   })
 
   afterAll(async () => {
